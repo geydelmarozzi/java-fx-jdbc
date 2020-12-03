@@ -56,7 +56,7 @@ public class MainViewController implements Initializable {
 
 	}
 	
-	//o synchronized garante que o processamento do método não será interrompido pelo multi-thread
+	//o synchronized --> garante que o processamento do método não será interrompido pelo multi-thread
 	//o Consumer<T> initializinAction .. permite receber uma função Lambda de inicialização do método! Passa a ser uma função Genérica do tipo <T>
 	private synchronized <T> void loadView(String absoluteName, Consumer<T> initializinAction) {
 		try {

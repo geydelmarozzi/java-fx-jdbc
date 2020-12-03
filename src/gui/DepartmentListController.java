@@ -65,13 +65,14 @@ public class DepartmentListController implements Initializable, DataChangeListen
 		
 	//Injeção de Dependência - reduz o acoplamento!
 	public void setDepartmentService(DepartmentService service) {
+		System.out.println("passou setDepartmentService!");
 		this.service = service;
 	}
 	
-	@Override
+	//Primeiro método que será executado automaticamente quando a tela for instanciada!
+	@Override    
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		initializeNodes();
-
 	}
 
 	private void initializeNodes() {
@@ -123,6 +124,7 @@ public class DepartmentListController implements Initializable, DataChangeListen
 		
 	}
 
+	//Evento que será disparado quando tiver uma alteração no Grid!
 	@Override
 	public void onDataChanger() {
 		updateTableView();

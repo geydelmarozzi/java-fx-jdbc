@@ -15,7 +15,6 @@ import gui.util.Utils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -30,6 +29,7 @@ public class DepartmentFormController implements Initializable{
 	
 	private DepartmentService service;
 	
+	//Lista com os objetos que se inscreverão na lista de eventos que serão acionados a cada alteração nos dados.
 	private List<DataChangeListener> dataChangeListeners = new ArrayList<>();
 	
 	@FXML
@@ -55,6 +55,7 @@ public class DepartmentFormController implements Initializable{
 		this.service = service;
 	}
 	
+	//Inclui o objeto na lista para que seja acionado o evento de alteração de dados!
 	public void subscribeDataChangeListener(DataChangeListener listener) {
 		dataChangeListeners.add(listener);
 	}
@@ -70,7 +71,7 @@ public class DepartmentFormController implements Initializable{
 		try {
 			entity = getFormData();
 			service.saveOrUpdate(entity);
-			notifyDataChangeListeners();
+			notifyDataChangeListeners();  //Chama o Evento de atualização dos dados! - executa o método on DataChanged()
 			Utils.currentStage(event).close();
 		}
 		catch (ValidationException e) {
@@ -82,6 +83,7 @@ public class DepartmentFormController implements Initializable{
 	}
 
 	private void notifyDataChangeListeners() {
+		//Percorre a lista e chama o evento de  alteração de dados!
 		for (DataChangeListener listener : dataChangeListeners) {
 			listener.onDataChanger();
 		}
@@ -118,6 +120,7 @@ public class DepartmentFormController implements Initializable{
 	}
 	
 	private void initializeNodes() {
+		//Configura as restrições de tipo de dados, tamanho, etc.. de cada campo!
 		Constraints.setTextFieldInteger(txtId);
 		Constraints.setTextFieldMaxLength(txtName, 30);
 	}
